@@ -22,15 +22,8 @@
             overlays = [ rust-overlay.overlays.default self.overlays.default ];
           };
           rocPkgs = roc.packages.${system};
-          wasilibcDrv = import ./nix/wasilibc.nix
-            {
-
-              stdenv = pkgs.stdenv;
-              fetchurl = pkgs.fetchurl;
-              lib = pkgs.lib;
-            };
         in
-        f { inherit pkgs; inherit rocPkgs; inherit wasilibcDrv; });
+        f { inherit pkgs; inherit rocPkgs; });
     in
     {
       overlays.default = final: prev: {
@@ -41,7 +34,7 @@
           rust.fromRustupToolchainFile ./rust-toolchain.toml;
       };
 
-      devShells = forEachSupportedSystem ({ pkgs, rocPkgs, wasilibcDrv }: {
+      devShells = forEachSupportedSystem ({ pkgs, rocPkgs }: {
         default = pkgs.mkShell.override
           {
             stdenv = pkgs.clangStdenv;
@@ -54,7 +47,6 @@
               pkg-config
               cargo-watch
               rust-analyzer
-              wasilibcDrv
 
               # roc
               rocPkgs.cli
@@ -65,17 +57,10 @@
               wasm-tools
               wabt
               wasm-bindgen-cli_0_2_100
-
-              zig
-              zls
-
               llvmPackages_18.libclang
               llvmPackages_18.libllvm
               llvmPackages_18.bintools-unwrapped
               lldb_18
-
-
-
               vscode-extensions.vadimcn.vscode-lldb
 
               # command runner
@@ -90,8 +75,6 @@
 
             env = {
               RUST_SRC_PATH = "${pkgs.rustToolchain}/lib/rustlib/src/rust/library";
-              WASI_LIBC = "${wasilibcDrv}/wasi-sdk-25.0-x86_64-linux/share/wasi-sysroot/lib/wasm32-wasi/libc.a";
-              WASI_COMPILER_BUILTINS_RT = "${wasilibcDrv}/wasi-sdk-25.0-x86_64-linux/lib/clang/19/lib/wasi/libclang_rt.builtins-wasm32.a";
             };
           };
       });

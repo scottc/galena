@@ -10,7 +10,7 @@ app [
 
 import galena.Backend as Backend exposing [Backend]
 import galena.Frontend as Frontend exposing [Frontend]
-import galena.View as View
+import galena.Html as Html
 
 FrontendModel : { counter : I32 }
 
@@ -50,27 +50,27 @@ frontend_update! = |msg, model|
 
         NoOp -> (model, Err NoOp)
 
-view : FrontendModel -> View.View FrontendMsg
+view : FrontendModel -> Html.Html FrontendMsg
 view = |model|
-    View.div
-        [View.id "main", View.class "bg-red-400 text-xl font-semibold"]
+    Html.div
+        [Html.id "main", Html.class "bg-red-400 text-xl font-semibold"]
         [
-            View.div [] [
-                View.text (Num.to_str model.counter),
-                View.button
+            Html.div [] [
+                Html.text (Num.to_str model.counter),
+                Html.button
                     [
-                        View.id "incr",
-                        View.class "bg-slate-400 border-1 border-blue-400 outline-none",
-                        View.on_click (|_| Decrement),
+                        Html.id "incr",
+                        Html.class "bg-slate-400 border-1 border-blue-400 outline-none",
+                        Html.on_click (|_| Decrement),
                     ]
-                    [View.text "-"],
-                View.button
+                    [Html.text "-"],
+                Html.button
                     [
-                        View.id "incr",
-                        View.class "bg-slate-400 border-1 border-blue-400 outline-none",
-                        View.on_click (|_| Increment),
+                        Html.id "incr",
+                        Html.class "bg-slate-400 border-1 border-blue-400 outline-none",
+                        Html.on_click (|_| Increment),
                     ]
-                    [View.text "+"],
+                    [Html.text "+"],
             ],
         ]
 
