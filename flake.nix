@@ -67,11 +67,8 @@
               just
 
               # node
-              nodejs_24
-              nodePackages.pnpm
-              typescript
+              bun
             ];
-
 
             env = {
               RUST_SRC_PATH = "${pkgs.rustToolchain}/lib/rustlib/src/rust/library";

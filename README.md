@@ -213,8 +213,8 @@ The build process requires these tools:
   - `wasm-ld`: WebAssembly linker
   - `wasm-bindgen`: JavaScript/TypeScript bindings generator
   - `wasm2wat`: WebAssembly text format converter
-- **Node.js ecosystem**:
-  - `pnpm`: Package manager for frontend dependencies
+- **Bun ecosystem**:
+  - `bun`: For bundling.
 - **System tools**: `cp`, `sh`, `grep`, `sed` (standard Unix utilities)
 
 ### Building the Project
@@ -250,7 +250,7 @@ This provides a development shell with:
 - Rust toolchain with WebAssembly targets
 - Roc compiler and language server
 - WebAssembly tools (wasmtime, wasm-tools, wabt, wasm-bindgen)
-- Node.js 24 and pnpm
+- Bun 1.3.1
 - LLVM tools and debugger support
 
 ### Build Process Details
@@ -266,7 +266,7 @@ The `build.roc` script performs these steps in order:
    - Extracts exported functions using `wasm2wat`
    - Links with `wasm-ld` to create the final WASM module
    - Generates TypeScript bindings with `wasm-bindgen`
-6. **Frontend Assets**: Runs `pnpm build` in the frontend directory
+6. **Frontend Assets**: Runs `bun run build` in the frontend directory
 7. **CLI Build**: Compiles the final Galena CLI with all components
 
 ### Running Applications

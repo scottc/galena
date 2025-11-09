@@ -94,7 +94,7 @@ build_frontend! = |roc_cmd|
 
     build_and_copy_wasmbindgen_js_to_frontend!(roc_cmd)?
 
-    pnpm_build_frontend!({})?
+    bun_build_frontend!({})?
 
     Ok {}
 
@@ -361,13 +361,13 @@ build_and_copy_wasmbindgen_js_to_frontend! = |roc_cmd|
 
     Ok {}
 
-pnpm_build_frontend! : {} => Result {} _
-pnpm_build_frontend! = |_|
+bun_build_frontend! : {} => Result {} _
+bun_build_frontend! = |_|
     Cmd.exec!(
         "bash",
         [
             "-c",
-            "cd frontend && pnpm build",
+            "cd frontend && bun run build",
         ],
     )?
 

@@ -1,15 +1,9 @@
 {
-  "name": "bingo",
-  "private": true,
+  "name": "frontend",
   "version": "0.0.0",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "bun build ./index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'"
   },
-  "devDependencies": {
-    "typescript": "~5.7.2",
-    "vite": "^6.3.1"
-  }
+  "type": "module"
 }
